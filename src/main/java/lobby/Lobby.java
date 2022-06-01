@@ -1,5 +1,6 @@
 package lobby;
 
+import baseData.Bd;
 import supertragaperras.Supertragaperras;
 
 import javax.swing.*;
@@ -17,6 +18,7 @@ public class Lobby extends JFrame implements ActionListener {
     JLabel fondo;
     JLabel titulo;
     JButton slot;
+    JButton highscore;
     JLabel maq;
     Timer halfsec;
     boolean sec;
@@ -29,7 +31,7 @@ public class Lobby extends JFrame implements ActionListener {
         super("GAMES");
 
         // maquina
-        this.setBounds(1000, 100, 480, 640);
+        this.setBounds(1000, 100, 600, 600);
         this.setLayout(null);
         // Timer
         halfsec = new Timer(500, this);
@@ -37,9 +39,11 @@ public class Lobby extends JFrame implements ActionListener {
 
         // Imagenes
 
-        img.add(new ImageIcon(ruta + "wall.png"));// 0
+        img.add(new ImageIcon(ruta +"espacio.jpg"));// 0
         img.add(new ImageIcon(ruta+"xogos.png"));// 1
         img.add(new ImageIcon(ruta+"red777.png"));// 2
+        img.add(new ImageIcon(ruta+"podio.png"));// 3
+
 
         // #EABE3F oro
         // SLOT
@@ -50,16 +54,24 @@ public class Lobby extends JFrame implements ActionListener {
         add(titulo);
 
         slot = new JButton();
-        slot.setBounds(50, 400, 100, 145);
+        slot.setBounds(50, 300, 100, 145);
         slot.setBackground(Color.BLACK);
         slot.setOpaque(true);
         slot.setIcon(img.get(2));
         slot.addActionListener(this);
         add(slot);
 
+        highscore = new JButton();
+        highscore.setBounds(350, 10, 64, 64);
+        highscore.setBackground(Color.BLACK);
+        highscore.setOpaque(true);
+        highscore.setIcon(img.get(3));
+        highscore.addActionListener(this);
+        add(highscore);
+
 
         fondo = new JLabel();
-        fondo.setBounds(0, 0, 480, 640);
+        fondo.setBounds(0, 0, 600, 600);
         fondo.setIcon(img.get(0));
         add(fondo);
         System.out.println("fin");
@@ -83,6 +95,11 @@ public class Lobby extends JFrame implements ActionListener {
             super.dispose();
         }
 
+        if (action.getSource()==highscore){
+           // Bd.insertar();
+            Bd.select();
+        }
+
         if (action.getSource() == halfsec) {
 
             if (sec) {
@@ -90,7 +107,8 @@ public class Lobby extends JFrame implements ActionListener {
                 System.out.println("*takt*" + bling);
                 slot.setBackground(Color.BLACK);
             } else {
-                slot.setBackground(Color.decode("#EABE3F"));
+                slot.setBackground(Color.white);
+                //slot.setBackground(Color.decode("#EABE3F"));
             }
         }
     }
