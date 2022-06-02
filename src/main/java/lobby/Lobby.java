@@ -1,6 +1,7 @@
 package lobby;
 
 import baseData.Bd;
+import baseData.Highscore;
 import supertragaperras.Supertragaperras;
 
 import javax.swing.*;
@@ -8,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Lobby extends JFrame implements ActionListener {
@@ -87,7 +89,7 @@ public class Lobby extends JFrame implements ActionListener {
         if (action.getSource() == slot) {
             Supertragaperras window = new Supertragaperras();
 
-            window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             window.setVisible(true);
             window.setResizable(true);
         }
@@ -95,6 +97,11 @@ public class Lobby extends JFrame implements ActionListener {
         if (action.getSource()==highscore){
            // Bd.insertar();
             Bd.select();
+            try {
+                Highscore h=new Highscore();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         if (action.getSource() == halfsec) {

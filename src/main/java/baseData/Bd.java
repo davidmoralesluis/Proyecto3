@@ -6,6 +6,25 @@ import java.sql.*;
 
 public class Bd {
 
+    public static ResultSet connect(){
+        String url = "jdbc:sqlite:src" + File.separator + "main" + File.separator + "java"+ File.separator + "baseData" + File.separator + "Proyecto3.db";
+
+        try {
+            Connection conex = DriverManager.getConnection(url);
+
+            Statement dec = conex.createStatement();
+            ResultSet reSet = dec.executeQuery("Select * from Slot");
+
+            return reSet;
+
+
+
+        } catch (SQLException err) {
+            System.out.println(err.getMessage());
+        }
+        return null;
+    }
+
     public static void select() {
 
         String url = "jdbc:sqlite:src" + File.separator + "main" + File.separator + "java"+ File.separator + "baseData" + File.separator + "Proyecto3.db";
@@ -28,6 +47,7 @@ public class Bd {
                 System.out.println("+++++++++");
             }
             while(reSet.next()){
+
                 System.out.println(reSet.getString("Name")+" ---> "+reSet.getString("Cash"));
             }
             for (int i = 0; i < 5; i++) {
