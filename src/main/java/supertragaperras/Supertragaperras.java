@@ -1,5 +1,7 @@
 package supertragaperras;
 
+import baseData.Bd;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -59,6 +61,7 @@ public class Supertragaperras extends JFrame implements ActionListener {
         img.add(new ImageIcon(ruta+"cherry.png"));//11
         img.add(new ImageIcon(ruta+"limon.png"));//12
         img.add(new ImageIcon(ruta+"fail.png"));//13
+        img.add(new ImageIcon(ruta+"exit.png"));//14
 
 
         //Timer
@@ -167,8 +170,10 @@ public class Supertragaperras extends JFrame implements ActionListener {
 
         if (dinero>1) {
             cash=true;
+            insertCoin.setIcon(img.get(14));
         }else{
             cash=false;
+            insertCoin.setIcon(img.get(2));
         }
 
         if (action.getSource()==mili300) {
@@ -198,6 +203,7 @@ public class Supertragaperras extends JFrame implements ActionListener {
         }
 
         if (action.getSource()==sec) {
+
             if (segundo) {
                 titulo.setForeground(Color.RED);
                 info.setBackground(Color.MAGENTA);
@@ -217,7 +223,12 @@ public class Supertragaperras extends JFrame implements ActionListener {
         }
 
         if (action.getSource()==insertCoin) {
-            dinero+=10.0;
+            if (!cash){
+                dinero+=10.0;
+            }else {
+                Bd.insertar(dinero);
+                this.dispose();
+            }
             saldo.setText(String.format("%02.2f", dinero));
             winLose.setText("+10$");
             winLose.setForeground(Color.GREEN);

@@ -19,11 +19,9 @@ public class Lobby extends JFrame implements ActionListener {
     JLabel titulo;
     JButton slot;
     JButton highscore;
-    JLabel maq;
     Timer halfsec;
     boolean sec;
-    int bling = 0;
-    boolean blingUp = false;
+
     // Imagenes
     ArrayList<Icon> img = new ArrayList<Icon>();
 
@@ -49,7 +47,7 @@ public class Lobby extends JFrame implements ActionListener {
         // SLOT
 
         titulo = new JLabel();
-        titulo.setBounds(85, 110, 325, 100);
+        titulo.setBounds(125, 110, 325, 100);
         titulo.setIcon(img.get(1));
         add(titulo);
 
@@ -62,8 +60,8 @@ public class Lobby extends JFrame implements ActionListener {
         add(slot);
 
         highscore = new JButton();
-        highscore.setBounds(350, 10, 64, 64);
-        highscore.setBackground(Color.BLACK);
+        highscore.setBounds(500, 10, 64, 64);
+        highscore.setBackground(Color.decode("#EABE3F"));
         highscore.setOpaque(true);
         highscore.setIcon(img.get(3));
         highscore.addActionListener(this);
@@ -92,7 +90,6 @@ public class Lobby extends JFrame implements ActionListener {
             window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             window.setVisible(true);
             window.setResizable(true);
-            super.dispose();
         }
 
         if (action.getSource()==highscore){
@@ -103,12 +100,9 @@ public class Lobby extends JFrame implements ActionListener {
         if (action.getSource() == halfsec) {
 
             if (sec) {
-                bling++;
-                System.out.println("*takt*" + bling);
                 slot.setBackground(Color.BLACK);
             } else {
-                slot.setBackground(Color.white);
-                //slot.setBackground(Color.decode("#EABE3F"));
+                slot.setBackground(Color.decode("#EABE3F"));
             }
         }
     }

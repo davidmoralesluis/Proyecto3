@@ -42,7 +42,7 @@ public class Bd {
 
 
 
-    public static void insertar() {
+    public static void insertar(double dinero) {
 
         String url = "jdbc:sqlite:src" + File.separator + "main" + File.separator + "java"+ File.separator + "baseData" + File.separator + "Proyecto3.db";
 
@@ -54,7 +54,7 @@ public class Bd {
             PreparedStatement pre = conex.prepareStatement("INSERT INTO Slot(Name,Cash) VALUES(?,?)");
             {
                 pre.setString(1, JOptionPane.showInputDialog("Introduce Nombre?"));
-                pre.setString(2, JOptionPane.showInputDialog("€€€"));
+                pre.setDouble(2, dinero);
                 pre.executeUpdate();
             }
 
