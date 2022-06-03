@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class Lobby extends JFrame implements ActionListener {
 
@@ -21,6 +22,7 @@ public class Lobby extends JFrame implements ActionListener {
     JLabel titulo;
     JButton slot;
     JButton highscore;
+    JButton reigns;
     Timer halfsec;
     boolean sec;
 
@@ -43,6 +45,7 @@ public class Lobby extends JFrame implements ActionListener {
         img.add(new ImageIcon(ruta+"xogos.png"));// 1
         img.add(new ImageIcon(ruta+"red777.png"));// 2
         img.add(new ImageIcon(ruta+"podio.png"));// 3
+        img.add(new ImageIcon(ruta+"reigns.jpg"));//4
 
 
         // #EABE3F oro
@@ -69,6 +72,13 @@ public class Lobby extends JFrame implements ActionListener {
         highscore.addActionListener(this);
         add(highscore);
 
+        reigns = new JButton();
+        reigns.setBounds(435, 300, 100, 145);
+        reigns.setBackground(Color.decode("#EAF643"));
+        reigns.setOpaque(true);
+        reigns.setIcon(img.get(4));
+        reigns.addActionListener(this);
+        add(reigns);
 
         fondo = new JLabel();
         fondo.setBounds(0, 0, 600, 600);
@@ -112,6 +122,15 @@ public class Lobby extends JFrame implements ActionListener {
                 slot.setBackground(Color.decode("#EABE3F"));
             }
         }
+
+        if (action.getSource() == reigns){
+            try{    //Try por posibles excepciones.
+                reigns.Metodos obj = new reigns.Metodos();    //Instanciamos un objeto de la clase Metodos.
+                obj.menu();    //Llamamos al metodo menu.
+            }catch(NoSuchElementException e){ //Catch por posibles excepciones.
+                JOptionPane.showMessageDialog(null, "Cerrando Reigns");
+            }
+        }
+
     }
 }
-
