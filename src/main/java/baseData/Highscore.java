@@ -12,16 +12,19 @@ public class Highscore extends JFrame implements ActionListener {
 
     JFrame ventana;
     JPanel panel;
-    JLabel tragaperra, highscore;
+    JLabel tragaperra, highscore, reigns;
     Timer halfsec;
-    ResultSet test;
+    ResultSet test, prueba;
     boolean sec;
 
 
     String [] columnas={"Nombre","Puntos"};
+    String [] valores={"Nombre","Puntos"};
     DefaultTableModel modelo = new DefaultTableModel();
+    DefaultTableModel model = new DefaultTableModel();
 
     JTable tabla = new JTable (modelo);
+    JTable table = new JTable (model);
 
     public Highscore() throws SQLException {
         super("Highscore");
@@ -39,6 +42,10 @@ public class Highscore extends JFrame implements ActionListener {
         panel.setBackground(new Color(53, 104, 45));
         panel.setLayout(null);
 
+        table.setBounds(330,150,200,350);
+        model.addColumn("Nombre");
+        model.addColumn("Puntos");
+        model.setColumnIdentifiers(valores);
 
         tabla.setBounds(50,150,200,350);
         modelo.addColumn("Nombre");
@@ -60,12 +67,17 @@ public class Highscore extends JFrame implements ActionListener {
         highscore.setForeground(Color.decode("#EABE3F"));
         highscore.setOpaque(false);
 
+        reigns = new JLabel("Reigns", SwingConstants.CENTER);
+        reigns.setBounds(330,100,200,30);
+        reigns.setBackground(Color.decode("#EABE3F"));
+        reigns.setVerticalAlignment(SwingConstants.CENTER);
+        reigns.setOpaque(true);
 
-
-
+        panel.add(reigns);
         panel.add(tragaperra);
         panel.add(highscore);
         panel.add(tabla);
+        panel.add(table);
 
 
         ventana.add(panel);
@@ -74,10 +86,14 @@ public class Highscore extends JFrame implements ActionListener {
 
 
         test=Bd.connect();
+        prueba=Bd.conecta();
         while(test.next()){
             modelo.addRow(new Object[]{test.getString("Name"),test.getString("Cash")});
         }
 
+        while(prueba.next()){
+            model.addRow(new Object[]{prueba.getString("Nombre"),prueba.getString("Puntos")});
+        }
     }
 
     @Override

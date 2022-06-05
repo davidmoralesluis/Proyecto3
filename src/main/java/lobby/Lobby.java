@@ -22,7 +22,7 @@ public class Lobby extends JFrame implements ActionListener {
     JLabel titulo;
     JButton slot;
     JButton highscore;
-    JButton reigns;
+    JButton reinos;
     Timer halfsec;
     boolean sec;
 
@@ -72,13 +72,13 @@ public class Lobby extends JFrame implements ActionListener {
         highscore.addActionListener(this);
         add(highscore);
 
-        reigns = new JButton();
-        reigns.setBounds(435, 300, 100, 145);
-        reigns.setBackground(Color.decode("#EAF643"));
-        reigns.setOpaque(true);
-        reigns.setIcon(img.get(4));
-        reigns.addActionListener(this);
-        add(reigns);
+        reinos = new JButton();
+        reinos.setBounds(435, 300, 100, 145);
+        reinos.setBackground(Color.decode("#EAF643"));
+        reinos.setOpaque(true);
+        reinos.setIcon(img.get(4));
+        reinos.addActionListener(this);
+        add(reinos);
 
         fondo = new JLabel();
         fondo.setBounds(0, 0, 600, 600);
@@ -123,10 +123,13 @@ public class Lobby extends JFrame implements ActionListener {
             }
         }
 
-        if (action.getSource() == reigns){
+        if (action.getSource() == reinos){
             try{    //Try por posibles excepciones.
-                reigns.Metodos obj = new reigns.Metodos();    //Instanciamos un objeto de la clase Metodos.
-                obj.menu();    //Llamamos al metodo menu.
+                //reigns.Metodos obj = new reigns.Metodos();    //Instanciamos un objeto de la clase Metodos.
+                //obj.menu();    //Llamamos al metodo menu.
+                reigns.Imagenes obj = new  reigns.Imagenes();
+                obj.panTitulo("Bienvenido a Reigns","imagenes/reigns.jpg", "Reigns");
+
             }catch(NoSuchElementException e){ //Catch por posibles excepciones.
                 JOptionPane.showMessageDialog(null, "Cerrando Reigns");
             }

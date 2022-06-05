@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 
 public class Opciones {
-    
+
     static int i = 0;   //Variable que decide los resultados de cada decisión.
     
     static void escoger(int s){ //Método que se lanza en cada turno de juego.

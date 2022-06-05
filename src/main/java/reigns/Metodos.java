@@ -8,17 +8,17 @@ import javax.swing.JOptionPane;
 public class Metodos {
     
     static int pue = 50, eco= 50, igl = 50, mil = 50; //Las 4 variables que van a ser representadas más adelante.
-    int edad = 0; //Variable que cuenta las veces que se ha cumplido el bucle de juego.
+    static int edad = 0; //Variable que cuenta las veces que se ha cumplido el bucle de juego.
     
     
-    public void menu() {   //Menú del juego.
+    public static void menu() {   //Menú del juego.
         String opcion; //Variable que para determinar que opción escoge el jugador.
         int op = 0; //Variable para el switch.
         
         do{
             try{
-                opcion = JOptionPane.showInputDialog("Bienvenido a Reigns\n\n¿Que desea hacer?\n\n\n1.Jugar\n2.Ayuda\n3.Salir"); //String que convertiremos en un int.
-                if (opcion == null){    //Si el jugador le da a el botón de cancelar(devuelve un null) en vez de dar un error rompa.
+                opcion = JOptionPane.showInputDialog("Bienvenido a Reigns\n\n ¿Que desea hacer?\n\n\n1.Jugar\n2.Ayuda\n3.Salir"); //String que convertiremos en un int.
+                if (opcion == null){    //Si el jugador le da al botón de cancelar(devuelve un null) en vez de dar un error rompa.
                     break;
                 }
                 else{
@@ -40,7 +40,7 @@ public class Metodos {
         }while(op != 3 );
     }
 
-    public void tutorial(){     //Método tutorial que enseña por pantalla un mensaje de ayuda.
+    public static void tutorial(){     //Método tutorial que enseña por pantalla un mensaje de ayuda.
         JOptionPane.showMessageDialog(null,"Bienvenido a Reigns\n\n"
         + "Reigns es un juego por turnos en el que encarnas a un nuevo rey elegido para gobernar, y las reglas son sencillas:\n\n"
         + "El jugador tiene delante 4 barras que representan distintos poderes en el reino: el pueblo, la economía, el poder militar y la iglesia.\n"
@@ -48,7 +48,7 @@ public class Metodos {
         + "\nCada turno de reigns representa un año de reinado, intenta aguantar lo suficiente para delegar tus deberes al siguiente\n pretendiente a monarca.");
     }
     
-    public String leer(File fich){  //Método que lee la primera linea de un archivo de texto.
+    public static String leer(File fich){  //Método que lee la primera linea de un archivo de texto.
         Scanner sc = null;  //Creamos un Scanner.
         String i = null;    //Creamos el String a devolver por el método.
         
@@ -63,11 +63,11 @@ public class Metodos {
         return i;
     }
     
-     public void nombre(){  //Método para pedir el Nombre y meterlo en un fichero
+     public static void nombre(){  //Método para pedir el Nombre y meterlo en un fichero
         try {
             FileWriter fich = new FileWriter("fichero.txt");    //Creamos un FileWriter de nombre fich que escriba en un archivo llamado fichero.txt
             fich.write(JOptionPane.showInputDialog(null,"Introduce el nombre del nuevo rey"));  //Recibimos el String por teclado y se escribe.
-            fich.close();   //Se cierrra el flujo.
+            fich.close();   //Se cierra el flujo.
         }catch (IOException e){ //Catch para errores IOException.
             JOptionPane.showMessageDialog(null,"Ha ocurrido un error, prueba con otro nombre"); //Mensaje a sacar por pantalla si ocurre la excepción.
         }catch (NullPointerException e){    //Catch para errores de tipo NullPointerException
@@ -75,7 +75,7 @@ public class Metodos {
         }
     }
     
-     public String barras(){    //Método que crea y saca por pantalla la representación de las variables a gestionar en el juego junto con el nombre del rey y su edad.
+     public static String barras(){    //Método que crea y saca por pantalla la representación de las variables a gestionar en el juego junto con el nombre del rey y su edad.
          File fich = new File("fichero.txt");   //Instanciamos el fichero para usarlo más tarde.
          
          String i;  //String que recibe la barra que representa la iglesia.
@@ -84,7 +84,7 @@ public class Metodos {
          String p;  //String que recibe la barra que representa el pueblo.
          String todo;   //String que recibe todas las barras y las devuelve junto con el nombre y edad del rey al final del método.
          
-         //A continuación están una serie de "if else" que decinen las barras, son todos iguales y funcionan de la misma forma. Dependiendo de los valores entre los que se encuentre la variable le dan un aspecto.
+         //A continuación están una serie de "if else" que definen las barras, son todos iguales y funcionan de la misma forma. Dependiendo de los valores entre los que se encuentre la variable le dan un aspecto.
          
          if (pue <= 0)
              p = "Pueblo                    [_____________________]";
@@ -197,51 +197,51 @@ public class Metodos {
          return todo;
      }
     
-    public int perder(){    //Método que salta cuando una de las barras se llena o vacía. Tiene la misma estructura que el método barras(). Al final de cada elección salta una imagen personalizada por cada muerte.
+    public static int perder(){    //Método que salta cuando una de las barras se llena o vacía. Tiene la misma estructura que el método barras(). Al final de cada elección salta una imagen personalizada por cada muerte.
         reigns.Imagenes obx = new reigns.Imagenes();
         if (pue >= 100){
             JOptionPane.showMessageDialog(null,"El pueblo es demasiado numeroso y hay rumores recientes de que nuevos lideres\n le quieren muerto.");
-            obx.inicializar("Como decían los rumores había gente en su contra, lo cual termino en un sutil envenenamiento", "envenenado.png", "El rey ha muerto");
+            obx.inicializar("Como decían los rumores había gente en su contra, lo cual termino en un sutil envenenamiento", "imagenes/envenenado.png", "El rey ha muerto");
             return 1;
         }else if (pue <= 0) {
             JOptionPane.showMessageDialog(null,"El pueblo está harto de los malos tratos y vienen hacia el castillo, su reino\n está muerto y quieren algo a cambio.");
-            obx.inicializar("El castillo es saqueado, buestra corte se dispersa y solo os quedan como últimos subditos las palomas", "palomas.png", "El rey ha muerto");
+            obx.inicializar("El castillo es saqueado, buestra corte se dispersa y solo os quedan como últimos subditos las palomas", "imagenes/palomas.png", "El rey ha muerto");
             return 1;
         }else if (mil >= 100){
             JOptionPane.showMessageDialog(null,"Nuestro ejército es demasiado fuerte y se ha hartado de que usted esté\n al mando, vienen hacia aquí");
-            obx.inicializar("Mientras habla con su consejero una flecha atraviesa la puerta y termina en un lugar en el que no debería estar", "flecha.png", "El rey ha muerto");
+            obx.inicializar("Mientras habla con su consejero una flecha atraviesa la puerta y termina en un lugar en el que no debería estar", "imagenes/flecha.png", "El rey ha muerto");
             return 1;
         }else if (mil <= 0) {
             JOptionPane.showMessageDialog(null,"Nuestro poder militar es tan malo que cualquier batalla nos llevaría a \nla ruina.");
-            obx.inicializar("Acompañado por los ultimos soldados fieles a la Corona, moris en las escaleras del trono", "cabeza.png", "El rey ha muerto");
+            obx.inicializar("Acompañado por los ultimos soldados fieles a la Corona, moris en las escaleras del trono", "imagenes/cabeza.png", "El rey ha muerto");
             return 1;
         }else if (igl >= 100) {
             JOptionPane.showMessageDialog(null,".La iglesia tiene demasiado porder, nadie le sigue, solo quedan 5 \npersonas en la corte.");
-            obx.inicializar("Los debotos de la iglesia llegan al castillo y no dudan en quemarle cual hereje", "quemado.png", "El rey ha muerto");
+            obx.inicializar("Los debotos de la iglesia llegan al castillo y no dudan en quemarle cual hereje", "imagenes/quemado.png", "El rey ha muerto");
             return 1;
         }else if (igl <= 0) {
             JOptionPane.showMessageDialog(null,"La iglesia ha perdido todo su poder, el pueblo se levanta en armas en su\n contra, solo queda escapar.");
-            obx.inicializar("Una multitud sedienta de libertad os masacra durante vuestra tentativa evasión", "pica.png", "El rey ha muerto");
+            obx.inicializar("Una multitud sedienta de libertad os masacra durante vuestra tentativa evasión", "imagenes/pica.png", "El rey ha muerto");
             return 1;
         }else if (eco >= 100) {
             JOptionPane.showMessageDialog(null,"Todo el dinero del reino se focaliza en los mercaderes, son demasiado\n ricos.");
-            obx.inicializar("Intentando huir ante la caida de la corona te ves encerrado por perros de los mercaderes", "perros.png", "El rey ha muerto");
+            obx.inicializar("Intentando huir ante la caida de la corona te ves encerrado por perros de los mercaderes", "imagenes/perros.png", "El rey ha muerto");
             return 1;
         }else if (eco <= 0) {
             JOptionPane.showMessageDialog(null,"No nos queda dinero su alteza y el reino es pobre como nosotros.");
-            obx.inicializar("Acabais tirados en un charco del bosque cercano, muriendo de inhanición", "tirado.png", "El rey ha muerto");
+            obx.inicializar("Acabais tirados en un charco del bosque cercano, muriendo de inhanición", "imagenes/tirado.png", "El rey ha muerto");
             return 1;
         }else;   
         
             return 0;
     }
     
-    public void ganar(){ //Método que salta al salir del loop de juego habiendo pasado 45 rondas.
+    public static void ganar(){ //Método que salta al salir del loop de juego habiendo pasado 45 rondas.
         Imagenes obx = new Imagenes();  //Inicializamos un objeto de la clase Imagenes que devuelve un Frame con texto y una imagen.
-        obx.inicializar("Habéis logrado evitar la muerte. Entrando a tu vejez le entregas la corona al siguiente candidato, y le deseas mucha suerte.", "corona.png", "¡Felicidades!");
+        obx.inicializar("Habéis logrado evitar la muerte. Entrando a tu vejez le entregas la corona al siguiente candidato, y le deseas mucha suerte.", "imagenes/corona.png", "¡Felicidades!");
     }
      
-    public void jugar(){    //Método troncal del programa.
+    public static void jugar(){    //Método troncal del programa.
         Random rd = new Random();   //Instanciamos in objeto de la clase random.
         File fich = new File("fichero.txt");    //Instanciamos un objeto de la clase file que referencie a nuetro fichero.
         nombre();   //Método que usamos para recoger el nombre que introduzca el jugador.
@@ -251,16 +251,22 @@ public class Metodos {
             k.add(i);
         }
         Collections.shuffle(k,rd);  //Usando el método shuffle en nuestro ArrayList y usando objeto Random mueve las posiciones del ArrayList de forma aleatoria, dejando un ArrayList de 45 números sin repetición ordenados de forma aleatoria.
-        for(int i = 0; i < 45; i++){    //Este bucle For es el loop de juego. Cada vuelta incrementa la varaible edad, llama al método escoger() con la posición del ArrayList correspondiente al turno y después enseña por pantalla la gestión de las barras.
+        for(int i = 0; i < 45; i++){    //Este bucle For es el loop de juego. Cada vuelta incrementa la variable edad, llama al método escoger() con la posición del ArrayList correspondiente al turno y después enseña por pantalla la gestión de las barras.
             edad++;
             Opciones.escoger(k.get(i));
             JOptionPane.showMessageDialog(null,barras());
-            if (perder() == 1)  //Cada vuelta del bucle también llama a el método perder() que devuelve un int con valor 1 si se cumplen las condiciones para perder.
+            if (perder() == 1)  //Cada vuelta del bucle también llama al método perder() que devuelve un int con valor 1 si se cumplen las condiciones para perder.
                 break;  //Si se cumplen las condiciones el bucle se rompe.
         }
         if (edad == 45){    //Fuera del bucle hay in if con la condición de que si han pasado 45 turnos el jugador gana.
             ganar();    //Llama al método ganar.
         }
+        baseData.Bd.insert(edad);
+        pue = 50;
+        igl = 50;
+        mil = 50;
+        eco = 50;
+        edad = 0;
     }
     
    
